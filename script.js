@@ -1,0 +1,5 @@
+const menuToggle=document.querySelector("#menuToggle"),navLinks=document.querySelector("#navLinks");
+menuToggle.addEventListener("click",()=>{const open=navLinks.classList.toggle("open");menuToggle.setAttribute("aria-expanded",String(open));menuToggle.textContent=open?"×":"☰"});
+navLinks.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{navLinks.classList.remove("open");menuToggle.setAttribute("aria-expanded","false");menuToggle.textContent="☰"}));
+const revealItems=document.querySelectorAll(".skill,.project-card");
+if("IntersectionObserver" in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("in-view");observer.unobserve(entry.target)}}),{threshold:.12});revealItems.forEach(item=>{item.style.opacity="0";item.style.transform="translateY(12px)";item.style.transition="opacity .5s ease, transform .5s ease";observer.observe(item)});const style=document.createElement("style");style.textContent=".skill.in-view,.project-card.in-view{opacity:1!important;transform:translateY(0)!important}";document.head.appendChild(style)}
